@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Kahoot Ranking</title>
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/yegor256/tacit@gh-pages/tacit-css.min.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
 </head>
 <body>
   ${result}
