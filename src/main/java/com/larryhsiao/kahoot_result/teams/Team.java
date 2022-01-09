@@ -7,4 +7,5 @@ import java.util.List;
 public interface Team {
     String name();
     List<Player> players();
+    double totalScore();
 }

@@ -7,10 +7,8 @@ import com.larryhsiao.kahoot_result.scores.KahootScores;
 import com.larryhsiao.kahoot_result.teams.TeamsImpl;
 
 public class CalculateScore implements Source<String> {
-
     @Override
     public String value() {
-        new KahootScores().all();
         new TeamsImpl(
             new ScoredPlayers(
                 new PlayersImpl(),
@@ -18,7 +16,8 @@ public class CalculateScore implements Source<String> {
             )
         ).all().forEach(team -> {
             System.out.print(team.name());
-            System.out.println(" team, " + team.players().size() + " players:");
+            System.out.println(
+                " team, " + team.players().size() + " players, totalScore: " + team.totalScore());
             team.players().forEach(player -> {
                 System.out.print(player.id());
                 System.out.print(" ");

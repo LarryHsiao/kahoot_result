@@ -22,4 +22,9 @@ public class ConstTeam implements Team {
     public List<Player> players() {
         return players;
     }
+
+    @Override
+    public double totalScore() {
+        return players.stream().mapToDouble(Player::score).sum();
+    }
 }
