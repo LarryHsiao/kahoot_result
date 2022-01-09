@@ -1,6 +1,6 @@
 package com.larryhsiao.kahoot_result.teams;
 
-import com.larryhsiao.kahoot_result.CellValue;
+import com.larryhsiao.kahoot_result.CellString;
 import com.larryhsiao.kahoot_result.players.Player;
 import com.larryhsiao.kahoot_result.players.Players;
 import com.larryhsiao.kahoot_result.players.RawPlayer;
@@ -29,7 +29,6 @@ public class TeamsImpl implements Teams {
             try (final XSSFWorkbook book = new XSSFWorkbook(new File(
                 getClass().getResource("/teams.xlsx").toURI()
             ))) {
-                final List<Team> result = new ArrayList<>();
                 final XSSFSheet sheet = book.getSheetAt(0);
                 for (Row row : sheet) {
                     if (row.getRowNum() < 1) {
@@ -44,8 +43,8 @@ public class TeamsImpl implements Teams {
                     );
                     ArrayList<Player> playersInTeam = new ArrayList<>();
                     for (int i = 0; i < 6; i++) {
-                        final String name = new CellValue(row, 1 + (i * 2)).value();
-                        final String id = new CellValue(row, 2 + (i * 2)).value();
+                        final String name = new CellString(row, 1 + (i * 2)).value();
+                        final String id = new CellString(row, 2 + (i * 2)).value();
                         Player player = players.byId(id).orElseGet(() ->
                             players.byName(name).orElse(null)
                         );
@@ -60,9 +59,9 @@ public class TeamsImpl implements Teams {
                             ));
                         }
                     }
-                    result.add(new ConstTeam(teamName, playersInTeam));
+                    teams.add(new ConstTeam(teamName, playersInTeam));
                 }
-                return result;
+                return teams;
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

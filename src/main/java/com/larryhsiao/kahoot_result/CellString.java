@@ -4,11 +4,11 @@ import com.larryhsiao.clotho.Source;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 
-public class CellValue implements Source<String> {
+public class CellString implements Source<String> {
     private final Row row;
     private final int index;
 
-    public CellValue(Row row, int index) {
+    public CellString(Row row, int index) {
         this.row = row;
         this.index = index;
     }

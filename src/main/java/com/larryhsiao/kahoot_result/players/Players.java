@@ -11,6 +11,4 @@ public interface Players {
     Optional<Player> byEmail(String email);
 
     Optional<Player> byName(String name);
-
-    Optional<Player> byKeyword(String keyword);
 }

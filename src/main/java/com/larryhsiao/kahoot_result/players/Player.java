@@ -6,4 +6,6 @@ public interface Player {
     String name();
 
     String email();
+
+    double score();
 }
