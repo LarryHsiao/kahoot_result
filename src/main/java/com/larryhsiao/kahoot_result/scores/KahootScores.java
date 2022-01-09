@@ -6,7 +6,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,16 +16,17 @@ public class KahootScores implements Scores {
     private final static int COLUMN_IDX_PLAYER_EMAIL = 2;
     private final static int COLUMN_IDX_PLAYER_SCORE = 3;
 
+    private final InputStream inputStream;
     private final List<Score> scores = new ArrayList<>();
+
+    public KahootScores(InputStream inputStream) {this.inputStream = inputStream;}
 
     @Override
     public List<Score> all() {
         if (!scores.isEmpty()) {
             return scores;
         }
-        try (final XSSFWorkbook book = new XSSFWorkbook(new File(
-            getClass().getResource("/kahoot_report.xlsx").toURI()
-        ))) {
+        try (final XSSFWorkbook book = new XSSFWorkbook(inputStream)) {
             final XSSFSheet sheet = book.getSheetAt(SHEET_IDX_FINAL_SCORE);
             for (Row cells : sheet) {
                 if (cells.getRowNum() <= 2) {

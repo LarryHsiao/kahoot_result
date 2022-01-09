@@ -7,5 +7,6 @@
         href="https://cdn.jsdelivr.net/gh/yegor256/tacit@gh-pages/tacit-css.min.css"/>
 </head>
 <body>
+  ${result}
 </body>
 </html>
