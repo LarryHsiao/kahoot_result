@@ -79,7 +79,10 @@ public class ScoredPlayers extends WrappedPlayers {
                 ).orElseGet(() ->
                     Optional.ofNullable(emailMap.get(it.id() + "@cmoney.com.tw")).orElseGet(() ->
                         Optional.ofNullable(nameMap.get(it.name()))
-                            .orElse(new DummyScore())
+                            .orElseGet(() ->
+                                Optional.ofNullable(nameMap.get(it.id()))
+                                    .orElse(new DummyScore())
+                            )
                     )
                 ).value();
             }
