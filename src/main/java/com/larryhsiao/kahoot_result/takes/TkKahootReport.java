@@ -15,6 +15,8 @@ import org.takes.rs.RsVelocity;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class TkKahootReport implements Take {
     @Override
@@ -51,9 +53,10 @@ public class TkKahootReport implements Take {
                 stringBuilder.append("</tbody>");
                 stringBuilder.append("</table>");
             });
+            String time = SimpleDateFormat.getDateInstance().format(new Date());
             new TextFile(
                 new File(
-                    "/home/larryhsiao/kahoot/reports/last_kahoot_report.html"
+                    "/home/larryhsiao/kahoot/reports/last_kahoot_report"+time+".html"
                 ),
                 new StreamString(
                     new RsVelocity(
