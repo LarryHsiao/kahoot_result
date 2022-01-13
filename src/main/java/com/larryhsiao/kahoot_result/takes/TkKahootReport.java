@@ -1,6 +1,7 @@
 package com.larryhsiao.kahoot_result.takes;
 
 import com.larryhsiao.clotho.file.TextFile;
+import com.larryhsiao.clotho.stream.StreamString;
 import com.larryhsiao.kahoot_result.players.PlayersImpl;
 import com.larryhsiao.kahoot_result.players.ScoredPlayers;
 import com.larryhsiao.kahoot_result.scores.KahootScores;
@@ -54,7 +55,12 @@ public class TkKahootReport implements Take {
                 new File(
                     "/home/larryhsiao/kahoot/reports/last_kahoot_report.html"
                 ),
-                stringBuilder.toString()
+                new StreamString(
+                    new RsVelocity(
+                        getClass().getResource("/result.html.vm"),
+                        new RsVelocity.Pair("result", stringBuilder.toString())
+                    ).body()
+                ).value()
             ).value();
             return new RsVelocity(
                 getClass().getResource("/result.html.vm"),
