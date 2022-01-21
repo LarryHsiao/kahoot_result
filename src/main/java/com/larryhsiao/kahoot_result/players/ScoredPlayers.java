@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class ScoredPlayers extends WrappedPlayers {
     private final Scores scores;
     private final Map<String, Score> emailMap = new HashMap<>();
-    private final Map<String, Score> nameMap = new HashMap<>();
+    private final Map<String, Score> nickNameMap = new HashMap<>();
 
     public ScoredPlayers(Players players, Scores scores) {
         super(players);
@@ -30,7 +30,7 @@ public class ScoredPlayers extends WrappedPlayers {
             scores.all().stream().collect(
                 Collectors.toMap(Score::userEmail, Function.identity(), (o1, o2) -> o1))
         );
-        nameMap.putAll(
+        nickNameMap.putAll(
             scores.all().stream().collect(
                 Collectors.toMap(Score::nickName, Function.identity(), (o1, o2) -> o1)
             )
@@ -78,10 +78,19 @@ public class ScoredPlayers extends WrappedPlayers {
                     emailMap.get(it.email())
                 ).orElseGet(() ->
                     Optional.ofNullable(emailMap.get(it.id() + "@cmoney.com.tw")).orElseGet(() ->
-                        Optional.ofNullable(nameMap.get(it.name()))
+                        Optional.ofNullable(nickNameMap.get(it.name()))
                             .orElseGet(() ->
-                                Optional.ofNullable(nameMap.get(it.id()))
-                                    .orElse(new DummyScore())
+                                Optional.ofNullable(nickNameMap.get(it.id())).orElseGet(() -> {
+                                    for (String nickName : nickNameMap.keySet()) {
+                                        if (nickName.contains(it.id())) {
+                                            return nickNameMap.get(nickName);
+                                        }
+                                        if (nickName.contains(it.name())) {
+                                            return nickNameMap.get(nickName);
+                                        }
+                                    }
+                                    return new DummyScore();
+                                })
                             )
                     )
                 ).value();
