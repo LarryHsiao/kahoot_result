@@ -83,9 +83,12 @@ public class TkKahootReport implements Take {
             if (counter > 32){
                 break;
             }
-            stringBuilder.append(counter).append(": ");
             stringBuilder.append(team.name());
-            stringBuilder.append("</br>");
+            if (counter % 2 == 0) {
+                stringBuilder.append("</br>");
+            }else{
+                stringBuilder.append("、");
+            }
             counter++;
         }
         return stringBuilder.toString();
