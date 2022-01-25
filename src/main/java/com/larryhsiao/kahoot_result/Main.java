@@ -1,5 +1,6 @@
 package com.larryhsiao.kahoot_result;
 
+import com.larryhsiao.kahoot_result.takes.TkItems;
 import com.larryhsiao.kahoot_result.takes.TkKahootPersonalReport;
 import com.larryhsiao.kahoot_result.takes.TkKahootReport;
 import org.takes.Request;
@@ -50,6 +51,12 @@ public class Main {
                     new FkMethods(
                         "POST",
                         new TkKahootReport()
+                    )
+                )),
+                new FkRegex("/items", new TkFork(
+                    new FkMethods(
+                        "GET",
+                        new TkItems()
                     )
                 ))
             ),
