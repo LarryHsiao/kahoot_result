@@ -1,5 +1,6 @@
 package com.larryhsiao.kahoot_result;
 
+import com.larryhsiao.kahoot_result.takes.TkKahootPersonalReport;
 import com.larryhsiao.kahoot_result.takes.TkKahootReport;
 import org.takes.Request;
 import org.takes.Response;
@@ -23,6 +24,23 @@ public class Main {
                             public Response act(Request req) {
                                 return new RsHtml(
                                     getClass().getResource("/upload.html")
+                                );
+                            }
+                        }
+                    )
+                )),
+                new FkRegex("/upload_personal", new TkFork(
+                    new FkMethods(
+                        "POST",
+                        new TkKahootPersonalReport()
+                    ),
+                    new FkMethods(
+                        "GET",
+                        new Take() {
+                            @Override
+                            public Response act(Request req) {
+                                return new RsHtml(
+                                    getClass().getResource("/upload_personal.html")
                                 );
                             }
                         }
