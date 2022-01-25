@@ -82,10 +82,16 @@ public class ScoredPlayers extends WrappedPlayers {
                             .orElseGet(() ->
                                 Optional.ofNullable(nickNameMap.get(it.id())).orElseGet(() -> {
                                     for (String nickName : nickNameMap.keySet()) {
-                                        if (nickName.contains(it.id())) {
+                                        if (nickName.toLowerCase().contains(it.id())) {
                                             return nickNameMap.get(nickName);
                                         }
-                                        if (nickName.contains(it.name())) {
+                                        if (nickName.toLowerCase().contains(it.name())) {
+                                            return nickNameMap.get(nickName);
+                                        }
+                                        if (nickName.toLowerCase().contains(it.email())) {
+                                            return nickNameMap.get(nickName);
+                                        }
+                                        if (nickName.toLowerCase().contains(it.id() + "@cmoney.com.tw")) {
                                             return nickNameMap.get(nickName);
                                         }
                                     }
